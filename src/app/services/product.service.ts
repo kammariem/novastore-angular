@@ -143,7 +143,7 @@ export class ProductService {
   }
 
   private prepareProduct(product: Product): Product {
-    const imagePath = product.imagesUri || product.image || 'assets/images/placeholder.png';
+    const imagePath = product.imagesUri || product.image || 'assets/images/placeholder.svg';
 
     return {
       ...product,

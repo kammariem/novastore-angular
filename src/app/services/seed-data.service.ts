@@ -24,7 +24,7 @@ export class SeedDataService {
       categoryId: 'femmes',
       categoryName: 'Femmes',
       type: 'Robe',
-      image: 'assets/images/robe-beige.jpg',
+      image: 'assets/images/placeholder.svg',
       stock: 12,
       available: true,
       promotion: false
@@ -37,7 +37,7 @@ export class SeedDataService {
       categoryId: 'femmes',
       categoryName: 'Femmes',
       type: 'Chemise',
-      image: 'assets/images/chemise-femme.jpg',
+      image: 'assets/images/placeholder.svg',
       stock: 20,
       available: true,
       promotion: false
@@ -50,7 +50,7 @@ export class SeedDataService {
       categoryId: 'accessoires',
       categoryName: 'Accessoires',
       type: 'Sac',
-      image: 'assets/images/sac-noir.jpg',
+      image: 'assets/images/placeholder.svg',
       stock: 8,
       available: true,
       promotion: true
@@ -63,7 +63,7 @@ export class SeedDataService {
       categoryId: 'hommes',
       categoryName: 'Hommes',
       type: 'T-Shirt',
-      image: 'assets/images/tshirt-homme.jpg',
+      image: 'assets/images/placeholder.svg',
       stock: 30,
       available: true,
       promotion: false

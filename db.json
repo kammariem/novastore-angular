@@ -20,7 +20,7 @@
       "slug": "femmes",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     },
     {
       "id": "2",
@@ -28,7 +28,7 @@
       "slug": "hommes",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     },
     {
       "id": "3",
@@ -36,7 +36,7 @@
       "slug": "enfants",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     },
     {
       "id": "4",
@@ -44,7 +44,7 @@
       "slug": "chaussures",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     },
     {
       "id": "5",
@@ -52,7 +52,7 @@
       "slug": "accessoires",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     },
     {
       "id": "6",
@@ -60,7 +60,7 @@
       "slug": "promotions",
       "active": true,
       "description": "",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/placeholder.svg"
     }
   ],
   "products": [
@@ -234,7 +234,7 @@
           "quantity": 1,
           "price": 89,
           "id": "1-1",
-          "image": "assets/images/placeholder.png"
+          "image": "assets/images/placeholder.svg"
         }
       ]
     },
@@ -255,7 +255,7 @@
           "quantity": 1,
           "price": 75,
           "id": "2-3",
-          "image": "assets/images/placeholder.png"
+          "image": "assets/images/placeholder.svg"
         },
         {
           "productId": "2",
@@ -263,7 +263,7 @@
           "quantity": 1,
           "price": 55,
           "id": "2-2",
-          "image": "assets/images/placeholder.png"
+          "image": "assets/images/placeholder.svg"
         }
       ]
     },
@@ -277,7 +277,7 @@
           "id": "vZynP9j",
           "productId": "vZynP9j",
           "productName": "tv",
-          "image": "assets/uploaded_imgs/1781823836995-post-sponsorisee-tv-tcl-plan-de-travail-1-copie-5-1.png",
+          "image": "assets/images/placeholder.svg",
           "quantity": 2,
           "price": 5555
         }

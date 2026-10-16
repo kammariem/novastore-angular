@@ -143,7 +143,7 @@ export class ProductsAdminComponent implements OnInit {
   }
 
   getProductImage(product: Product): string {
-    return product.imagesUri || product.image || 'assets/images/placeholder.png';
+    return product.imagesUri || product.image || 'assets/images/placeholder.svg';
   }
 
   trackByProductId(index: number, product: Product): string {
@@ -163,7 +163,7 @@ export class ProductsAdminComponent implements OnInit {
     this.form.stock = Number(this.form.stock) || 0;
     this.form.price = Number(this.form.price) || 0;
     this.form.available = this.form.stock > 0;
-    this.form.imagesUri = this.form.imagesUri || this.form.image || 'assets/images/placeholder.png';
+    this.form.imagesUri = this.form.imagesUri || this.form.image || 'assets/images/placeholder.svg';
     this.form.image = this.form.imagesUri;
   }
 
@@ -178,8 +178,8 @@ export class ProductsAdminComponent implements OnInit {
       categoryId: firstCategory?.slug || 'femmes',
       categoryName: firstCategory?.name || 'Femmes',
       type: 'Robe',
-      image: 'assets/images/placeholder.png',
-      imagesUri: 'assets/images/placeholder.png',
+      image: 'assets/images/placeholder.svg',
+      imagesUri: 'assets/images/placeholder.svg',
       stock: 0,
       available: true,
       promotion: false

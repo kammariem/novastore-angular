@@ -64,7 +64,7 @@ export class CategoryService {
       id: category.id == null ? slug || Date.now().toString() : String(category.id),
       slug,
       description: category.description || '',
-      image: category.image || 'assets/images/placeholder.png',
+      image: category.image || 'assets/images/placeholder.svg',
       active: category.active !== false
     };
   }

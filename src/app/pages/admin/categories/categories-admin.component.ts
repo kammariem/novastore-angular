@@ -69,7 +69,7 @@ export class CategoriesAdminComponent implements OnInit {
       name: '',
       slug: '',
       description: '',
-      image: 'assets/images/placeholder.jpg',
+      image: 'assets/images/placeholder.svg',
       active: true
     };
   }

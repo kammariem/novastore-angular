@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InventoryChartComponent } from './inventory-chart.component';
+import { configureComponentTestBed } from '../../../../testing/component-test-bed';
 
 describe('InventoryChartComponent', () => {
   let component: InventoryChartComponent;
   let fixture: ComponentFixture<InventoryChartComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [InventoryChartComponent]
-    });
+    configureComponentTestBed(InventoryChartComponent);
     fixture = TestBed.createComponent(InventoryChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

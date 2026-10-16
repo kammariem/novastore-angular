@@ -10,13 +10,14 @@ Angular 16, TypeScript, Firebase Authentication, JSON Server, Express, Multer, C
 ## Local development
 1. Install a compatible Node.js version for Angular 16 and install dependencies with `npm install` (regenerates the lockfile).
 2. Create your own Firebase project and replace placeholder values in `src/environments/environment.ts`.
-3. Start three terminals: `npm run api`, `npm run upload-api`, `npm start`.
-4. Open `http://localhost:4200`.
+3. Copy `.env.example` to `.env` and adjust the upload API host, port, or allowed CORS origins if needed. The server loads `.env` automatically.
+4. Start three terminals: `npm run api`, `npm run upload-api`, `npm start`.
+5. Open `http://localhost:4200`.
 
 ## Security and roadmap
 - Demo fixtures are synthetic. No original customer records or stored passwords are included.
 - Admin permissions currently rely on frontend email checks: **not secure for production**.
-- Upload API currently has no access control. The JSON Server is unauthenticated.
+- Upload API currently has no access control. It is bound to localhost by default, validates image signatures and size, and is **not secure or ready for production exposure**. The JSON Server is unauthenticated.
 - Replace mock API with protected backend and server-side authorization before public deployment.
 - Configure new hosting, tests, and CI/CD after security improvements.
 
