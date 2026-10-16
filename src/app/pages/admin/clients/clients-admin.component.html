@@ -1,0 +1,85 @@
+<section class="admin-page">
+  <div class="page-head">
+    <div>
+      <p>Clients</p>
+      <h2>Liste des clients</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="empty" *ngIf="clients.length === 0">
+      Aucun client pour le moment.
+    </div>
+
+    <div class="table" *ngIf="clients.length > 0">
+      <div class="table-header">
+        <span>Client</span>
+        <!-- <span>Email</span> -->
+        <span>Téléphone</span>
+        <span>Adresse</span>
+        <span>Statut (active)</span>
+        <span>Actions</span>
+      </div>
+
+      <div class="table-row" *ngFor="let client of clients; trackBy: trackByClientId">
+        <strong>{{ client.name }}</strong>
+        <!-- <span>{{ client.email }}</span> -->
+        <span>{{ client.phone || '—' }}</span>
+        <span>{{ client.address || '—' }}</span>
+
+        <span class="status" [class.draft]="!client.active">
+          {{ client.active ? 'active' : 'inactive' }}
+        </span>
+
+        <div class="actions">
+          <button type="button" (click)="openEditModal(client)">Modifier</button>
+          <button type="button" class="danger" (click)="deleteClient(client)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <form class="modal-card" (ngSubmit)="saveClient()">
+    <div class="modal-head">
+      <div>
+        <p>Modification</p>
+        <h3>Modifier le client</h3>
+      </div>
+      <button type="button" class="close" (click)="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <label>
+        Nom complet
+        <input name="name" required [(ngModel)]="form.name">
+      </label>
+
+      <label>
+        Email
+        <input name="email" type="email" required [(ngModel)]="form.email">
+      </label>
+
+      <label>
+        Téléphone
+        <input name="phone" [(ngModel)]="form.phone">
+      </label>
+
+      <label class="full">
+        Adresse
+        <textarea name="address" [(ngModel)]="form.address"></textarea>
+      </label>
+
+      <label class="checkbox-line">
+        <input type="checkbox" name="active" [(ngModel)]="form.active">
+        Client active
+      </label>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="secondary" (click)="closeModal()">Annuler</button>
+      <button type="submit" class="primary-action">Enregistrer</button>
+    </div>
+  </form>
+</div>

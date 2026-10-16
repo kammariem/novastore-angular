@@ -1,0 +1,106 @@
+<section class="admin-page dashboard-page">
+  <div class="page-head">
+    <div>
+      <p>Vue générale</p>
+      <h2>Dashboard</h2>
+    </div>
+  </div>
+
+  <div class="stats">
+    <a routerLink="/admin/categories" class="stat-card pink">
+      <i class="bi bi-tags"></i>
+      <span>Catégories</span>
+      <strong>{{ stats.totalCategories }}</strong>
+      <small>Gérer les catégories</small>
+    </a>
+
+    <a routerLink="/admin/products" class="stat-card indigo">
+      <i class="bi bi-box-seam"></i>
+      <span>Total produits</span>
+      <strong>{{ stats.totalProducts }}</strong>
+      <small>{{ stats.availableProducts }} active(s)</small>
+    </a>
+
+    <a routerLink="/admin/orders" class="stat-card peach">
+      <i class="bi bi-bag-check"></i>
+      <span>Commandes</span>
+      <strong>{{ stats.totalOrders }}</strong>
+      <small>{{ stats.pendingOrders }} en attente · {{ stats.confirmedOrders }} confirmée(s)</small>
+    </a>
+
+    <a routerLink="/admin/clients" class="stat-card sage">
+      <i class="bi bi-people"></i>
+      <span>Clients</span>
+      <strong>{{ stats.totalClients }}</strong>
+      <small>Modifier les fiches clients</small>
+    </a>
+  </div>
+
+  <div class="stats secondary">
+    <article>
+      <i class="bi bi-check-circle"></i>
+      <span>Produits disponibles</span>
+      <strong>{{ stats.availableProducts }}</strong>
+    </article>
+
+    <article>
+      <i class="bi bi-exclamation-circle"></i>
+      <span>Rupture stock</span>
+      <strong>{{ stats.outOfStock }}</strong>
+    </article>
+
+    <article>
+      <i class="bi bi-percent"></i>
+      <span>Promotions</span>
+      <strong>{{ stats.promotions }}</strong>
+    </article>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h3>Dernières commandes</h3>
+      <a routerLink="/admin/orders">Gérer les commandes</a>
+    </div>
+
+    <p *ngIf="orders.length === 0" class="empty-text">
+      Aucune commande pour le moment.
+    </p>
+
+    <div class="order-row" *ngFor="let order of orders.slice(0, 4)">
+      <span>{{ order.clientName }}</span>
+      <span>{{ order.total }} {{ order.currency }}</span>
+      <strong>{{ order.status }}</strong>
+      <a routerLink="/admin/orders">Ouvrir</a>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-panel">
+      <app-sales-trend></app-sales-trend>
+    </div>
+
+    <div class="chart-panel">
+      <app-category-revenue></app-category-revenue>
+    </div>
+
+    <div class="chart-panel">
+      <app-sales-overview></app-sales-overview>
+    </div>
+
+    <div class="chart-panel">
+      <app-product-performance></app-product-performance>
+    </div>
+
+    <div class="chart-panel">
+      <app-inventory-chart></app-inventory-chart>
+    </div>
+
+    <div class="chart-panel">
+      <app-order-status></app-order-status>
+    </div>
+
+    <div class="chart-panel">
+      <app-price-distribution></app-price-distribution>
+    </div>
+  </div>
+</section>

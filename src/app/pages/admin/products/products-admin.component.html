@@ -1,0 +1,131 @@
+<section class="admin-page">
+  <div class="page-head">
+    <div>
+      <p>Produits</p>
+      <h2>Liste des produits</h2>
+    </div>
+
+    <button type="button" class="primary-action" (click)="openAddModal()">
+      <i class="bi bi-plus-lg"></i> Ajouter
+    </button>
+  </div>
+
+  <div class="table-card">
+    <div class="table-title">
+      <h3>Liste des produits</h3>
+    </div>
+
+    <div class="table">
+      <div class="table-header">
+        <span>Produit</span>
+        <span>Catégorie</span>
+        <span>Prix</span>
+        <span>Stock</span>
+        <span>Statut (active)</span>
+        <span>Actions</span>
+      </div>
+
+      <div class="table-row" *ngFor="let product of products; trackBy: trackByProductId">
+        <div class="product-cell">
+          <img [src]="getProductImage(product)" [alt]="product.name">
+          <strong>{{ product.name }}</strong>
+        </div>
+
+        <span>{{ product.categoryName }}</span>
+        <span>{{ product.price }} TND</span>
+        <span>{{ product.stock }}</span>
+
+        <span class="status" [class.draft]="!product.available">
+          {{ product.available ? 'active' : 'rupture' }}
+        </span>
+
+        <div class="actions">
+          <button type="button" (click)="openEditModal(product)">
+            Modifier
+          </button>
+
+          <button type="button" class="danger" (click)="deleteProduct(product)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <form class="modal-card" (ngSubmit)="saveProduct()">
+    <div class="modal-head">
+      <div>
+        <p>{{ editingProductId ? 'Modification' : 'Ajout' }}</p>
+        <h3>{{ editingProductId ? 'Modifier le produit' : 'Ajouter un produit' }}</h3>
+      </div>
+      <button type="button" class="close" (click)="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <label>
+        Nom produit
+        <input name="name" required placeholder="Nom produit" [(ngModel)]="form.name">
+      </label>
+
+      <label>
+        Prix
+        <input name="price" required type="number" min="0" placeholder="Prix" [(ngModel)]="form.price">
+      </label>
+
+      <label>
+        Stock
+        <input name="stock" required type="number" min="0" placeholder="Stock" [(ngModel)]="form.stock">
+      </label>
+
+      <label class="full image-upload-field">
+        Image produit
+        <input name="imageFile" type="file" accept="image/*" (change)="onImageSelected($event)">
+        <small>Le fichier sera envoyé vers <strong>assets/uploaded_imgs/</strong>.</small>
+      </label>
+
+      <div class="image-preview" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Aperçu image produit">
+        <span>{{ selectedImageFile?.name || form.imagesUri || form.image }}</span>
+      </div>
+
+      <label>
+        Catégorie
+        <select name="category" [(ngModel)]="form.categoryId">
+          <option *ngFor="let category of categories" [value]="category.slug">
+            {{ category.name }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        Type
+        <select name="type" [(ngModel)]="form.type">
+          <option *ngFor="let type of productTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+      </label>
+
+      <label class="full">
+        Description
+        <textarea name="description" required placeholder="Description" [(ngModel)]="form.description"></textarea>
+      </label>
+
+      <label class="checkbox-line">
+        <input type="checkbox" name="promotion" [(ngModel)]="form.promotion">
+        Produit en promotion
+      </label>
+    </div>
+
+    <p class="form-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <div class="modal-actions">
+      <button type="button" class="secondary" (click)="closeModal()" [disabled]="saving">Annuler</button>
+      <button type="submit" class="primary-action" [disabled]="saving">
+        {{ saving ? 'Enregistrement...' : (editingProductId ? 'Enregistrer' : 'Ajouter produit') }}
+      </button>
+    </div>
+  </form>
+</div>

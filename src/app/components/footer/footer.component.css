@@ -1,0 +1,30 @@
+.footer {
+  width: min(1280px, calc(100% - 40px));
+  margin: 54px auto 22px;
+  background: var(--color-ink);
+  color: var(--surface);
+  text-align: center;
+  padding: 34px 22px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.footer .brand-lockup {
+  justify-content: center;
+}
+
+.footer .brand-text strong {
+  color: var(--surface);
+}
+
+.footer .brand-mark {
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--color-peach);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.72);
+  margin: 18px auto 0;
+  max-width: 620px;
+}

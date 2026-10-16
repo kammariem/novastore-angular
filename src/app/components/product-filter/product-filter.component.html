@@ -1,0 +1,45 @@
+<div class="filter-box">
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Rechercher un produit, une catégorie..."
+    [(ngModel)]="filter.search"
+    (input)="apply()"
+  >
+
+  <select [(ngModel)]="filter.categoryName" (change)="apply()">
+    <option value="">Toutes catégories</option>
+    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+  </select>
+
+  <input
+    type="number"
+    placeholder="Prix min"
+    [(ngModel)]="filter.minPrice"
+    (input)="apply()"
+  >
+
+  <input
+    type="number"
+    placeholder="Prix max"
+    [(ngModel)]="filter.maxPrice"
+    (input)="apply()"
+  >
+
+  <select [(ngModel)]="filter.available" (change)="apply()">
+    <option [ngValue]="null">Disponibilité</option>
+    <option [ngValue]="true">Disponible</option>
+    <option [ngValue]="false">Rupture</option>
+  </select>
+
+  <select [(ngModel)]="filter.promotion" (change)="apply()">
+    <option [ngValue]="null">Promotions</option>
+    <option [ngValue]="true">En promotion</option>
+    <option [ngValue]="false">Sans promotion</option>
+  </select>
+
+  <button type="button" (click)="reset()">
+    <i class="bi bi-arrow-counterclockwise"></i>
+    Réinitialiser
+  </button>
+</div>

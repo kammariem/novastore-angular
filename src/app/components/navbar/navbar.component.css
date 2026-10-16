@@ -1,0 +1,119 @@
+.navbar {
+  width: min(1280px, calc(100% - 40px));
+  margin: 18px auto 0;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-5);
+  align-items: center;
+  padding: 14px 18px;
+  position: sticky;
+  top: 14px;
+  z-index: 20;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+}
+
+.brand-lockup {
+  color: inherit;
+  text-decoration: none;
+}
+
+.links,
+.nav-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.links {
+  justify-content: center;
+}
+
+.links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 850;
+  padding: 10px 13px;
+  border-radius: var(--radius-pill);
+  position: relative;
+}
+
+.links a.active,
+.links a:hover {
+  color: var(--primary);
+  background: var(--color-indigo-100);
+  transform: none;
+}
+
+.cart,
+.login-link,
+.logout-btn {
+  min-height: 42px;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-pill);
+  padding: 10px 16px;
+}
+
+.cart {
+  background: var(--surface);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.cart span {
+  min-width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  background: var(--primary);
+  color: var(--surface);
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.login-link,
+.logout-btn {
+  background: linear-gradient(135deg, var(--primary), #6b5dff);
+  color: white !important;
+  box-shadow: 0 12px 26px rgba(91, 75, 255, 0.22);
+}
+
+@media (max-width: 920px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    width: min(100% - 24px, 1280px);
+  }
+
+  .brand-lockup,
+  .links,
+  .nav-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 540px) {
+  .links a,
+  .cart,
+  .login-link,
+  .logout-btn {
+    width: 100%;
+  }
+
+  .links,
+  .nav-actions {
+    width: 100%;
+  }
+}

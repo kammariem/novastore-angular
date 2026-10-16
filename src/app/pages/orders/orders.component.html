@@ -1,0 +1,68 @@
+<section class="checkout-page">
+  <div class="page-head">
+    <p>Commande directe</p>
+    <h1>Passer commande</h1>
+    <span>Vérifiez votre panier puis confirmez vos informations de livraison.</span>
+  </div>
+
+  <div class="success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="checkout-layout" *ngIf="cartService.getItems().length > 0; else emptyCart">
+    <aside class="summary-card">
+      <h2>Résumé du panier</h2>
+
+      <article *ngFor="let item of cartService.getItems()">
+        <img *ngIf="item.image" [src]="item.image" [alt]="item.productName">
+        <div>
+          <strong>{{ item.productName }}</strong>
+          <p>{{ item.quantity }} × {{ item.price }} TND</p>
+        </div>
+        <span>{{ item.quantity * item.price }} TND</span>
+      </article>
+
+      <div class="total">
+        <span>Total</span>
+        <strong>{{ cartService.getTotal() }} TND</strong>
+      </div>
+    </aside>
+
+    <form class="checkout-form" (ngSubmit)="submitOrder()">
+      <h2>Informations client</h2>
+
+      <label>
+        Nom complet
+        <input type="text" name="name" placeholder="Nom complet" [(ngModel)]="client.clientName">
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" placeholder="Email" [(ngModel)]="client.clientEmail">
+      </label>
+
+      <label>
+        Téléphone
+        <input type="text" name="phone" placeholder="Téléphone" [(ngModel)]="client.clientPhone">
+      </label>
+
+      <label>
+        Adresse de livraison
+        <textarea name="address" placeholder="Adresse de livraison" [(ngModel)]="client.clientAddress"></textarea>
+      </label>
+
+      <button type="submit">Confirmer la commande</button>
+    </form>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      Votre panier est vide.
+      <a routerLink="/products">Retour à la boutique</a>
+    </div>
+  </ng-template>
+</section>

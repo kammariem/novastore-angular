@@ -1,0 +1,90 @@
+<section class="hero-shell">
+  <div class="hero-card">
+    <div class="hero-copy">
+      <p class="eyebrow">Style · confort · confiance</p>
+      <h1>La mode pour <span>femmes</span> et <em>hommes</em></h1>
+      <p class="hero-text">
+        Des collections modernes, douces et unisexes pour trouver facilement votre look quotidien.
+      </p>
+      <a class="hero-button" routerLink="/products">
+        Voir la boutique
+        <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="hero-image-wrap">
+      <img class="hero-image" src="assets/images/hero_background.png" alt="Boutique Fashion Store">
+    </div>
+  </div>
+
+  <div class="trust-row" aria-label="Services Fashion Store">
+    <article>
+      <i class="bi bi-truck"></i>
+      <div>
+        <strong>Livraison rapide</strong>
+        <span>Partout en Tunisie</span>
+      </div>
+    </article>
+
+    <article>
+      <i class="bi bi-arrow-clockwise"></i>
+      <div>
+        <strong>Retours faciles</strong>
+        <span>Sous 14 jours</span>
+      </div>
+    </article>
+
+    <article>
+      <i class="bi bi-bag-check"></i>
+      <div>
+        <strong>Paiement sécurisé</strong>
+        <span>Commande directe</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="section-head">
+    <p class="eyebrow">Collections</p>
+    <h2>Catégories populaires</h2>
+  </div>
+
+  <div class="grid">
+    <article class="category-item femmes clickable" (click)="navToProducts('Femmes')">
+      <i class="bi bi-person-standing-dress"></i>
+      <strong>Femmes</strong>
+      <span>Nouveautés</span>
+    </article>
+
+    <article class="category-item hommes clickable" (click)="navToProducts('Hommes')">
+      <i class="bi bi-person-standing"></i>
+      <strong>Hommes</strong>
+      <span>Essentiels</span>
+    </article>
+
+    <article class="category-item enfants clickable" (click)="navToProducts('Enfants')">
+      <i class="bi bi-stars"></i>
+      <strong>Enfants</strong>
+      <span>Look doux</span>
+    </article>
+
+    <article class="category-item chaussures clickable" (click)="navToProducts('Chaussures')">
+      <i class="bi bi-backpack2"></i>
+      <strong>Chaussures</strong>
+      <span>Confort</span>
+    </article>
+
+    <article class="category-item accessoires clickable" (click)="navToProducts('Accessoires')">
+      <i class="bi bi-gem"></i>
+      <strong>Accessoires</strong>
+      <span>Détails</span>
+    </article>
+
+    <article class="category-item promotions clickable" (click)="navToProducts('Promotions')">
+      <i class="bi bi-percent"></i>
+      <strong>Promotions</strong>
+      <span>Jusqu'à -30%</span>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+<section class="login-page">
+  <div class="login-shell">
+    <aside class="brand-panel">
+      <div class="brand-lockup">
+        <span class="brand-mark"><img src="assets/images/icons/shop_icon.png" alt="Fashion Store Logo"></span>
+        <span class="brand-text">
+          <strong>Fashion Store</strong>
+          <span>Mode unisexe</span>
+        </span>
+      </div>
+
+      <h2>Votre espace shopping simple et sécurisé.</h2>
+      <p>Connectez-vous pour gérer votre panier, passer commande et suivre vos achats.</p>
+    </aside>
+
+    <form *ngIf="mode === 'login'" (ngSubmit)="login()">
+      <p class="eyebrow">Bienvenue</p>
+      <h1>Connexion</h1>
+      <p>Connectez-vous avec votre compte admin ou client.</p>
+
+      <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+      <input type="password" name="password" placeholder="Mot de passe" [(ngModel)]="password" required>
+
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Connexion...' : 'Se connecter' }}
+      </button>
+
+      <div class="switch-box">
+        <span>Vous n’avez pas encore de compte ?</span>
+        <button type="button" class="link-btn" (click)="showRegister()">Créer un compte client</button>
+      </div>
+    </form>
+
+    <form *ngIf="mode === 'register'" class="register-form" (ngSubmit)="registerClient()">
+      <p class="eyebrow">Nouveau client</p>
+      <h1>Créer un compte client</h1>
+      <p>Remplissez vos informations pour commander sur Fashion Store.</p>
+
+      <input type="text" name="registerName" placeholder="Nom complet" [(ngModel)]="registerName" required>
+      <input type="email" name="registerEmail" placeholder="Email" [(ngModel)]="registerEmail" required>
+      <input type="tel" name="registerPhone" placeholder="Téléphone" [(ngModel)]="registerPhone">
+      <textarea name="registerAddress" placeholder="Adresse de livraison" [(ngModel)]="registerAddress"></textarea>
+      <input type="password" name="registerPassword" placeholder="Mot de passe" [(ngModel)]="registerPassword" required>
+
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Création...' : 'Créer mon compte' }}
+      </button>
+
+      <div class="switch-box">
+        <span>Vous avez déjà un compte ?</span>
+        <button type="button" class="link-btn" (click)="showLogin()">Se connecter</button>
+      </div>
+    </form>
+  </div>
+</section>

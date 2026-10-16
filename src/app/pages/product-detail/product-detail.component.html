@@ -1,0 +1,37 @@
+<section class="detail" *ngIf="product">
+  <div class="image-panel">
+    <img [src]="product.image" [alt]="product.name">
+    <span *ngIf="product.promotion" class="promo-chip">Promotion</span>
+  </div>
+
+  <div class="info-panel">
+    <a routerLink="/products" class="back">
+      <i class="bi bi-arrow-left"></i>
+      Retour boutique
+    </a>
+
+    <p class="category">{{ product.categoryName }} · {{ product.type }}</p>
+    <h1>{{ product.name }}</h1>
+    <p class="description">{{ product.description }}</p>
+
+    <div class="price-box">
+      <span>Prix</span>
+      <strong>{{ product.price }} {{ product.currency }}</strong>
+    </div>
+
+    <p class="stock" [class.out]="!product.available">
+      <i class="bi" [ngClass]="product.available ? 'bi-check-circle' : 'bi-x-circle'"></i>
+      {{ product.available ? 'Stock disponible : ' + product.stock : 'Rupture de stock' }}
+    </p>
+
+    <button type="button" [disabled]="!product.available" (click)="addToCart()">
+      <i class="bi bi-cart3"></i>
+      Ajouter au panier
+    </button>
+  </div>
+</section>
+
+<section class="not-found" *ngIf="!product">
+  <i class="bi bi-search"></i>
+  Produit introuvable.
+</section>

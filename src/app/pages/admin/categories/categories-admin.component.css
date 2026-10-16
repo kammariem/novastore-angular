@@ -1,0 +1,49 @@
+.admin-page h2,
+.admin-page h3 {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.primary-action {
+  padding: 12px 18px;
+}
+
+.table-title {
+  margin-bottom: 18px;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 1.5fr 0.85fr 1.25fr;
+  gap: 14px;
+  align-items: center;
+  min-width: 860px;
+}
+
+.category-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-cell img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background: var(--color-cream);
+  border: 1px solid var(--border);
+}
+
+.modal-card {
+  width: min(760px, 100%);
+}
+
+@media (max-width: 900px) {
+  .page-head,
+  .table-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,32 @@
+<section class="page">
+  <div class="shop-hero">
+    <div>
+      <p class="eyebrow">Notre boutique</p>
+      <h1>Découvrez nos collections unisexes</h1>
+      <span>Des pièces modernes, pastel et faciles à commander.</span>
+    </div>
+    <div class="shop-hero-image">
+      <img src="assets/images/logo.png" alt="Fashion Store Logo">
+    </div>
+  </div>
+
+  <app-product-filter [categoryNameFilter]="recievedCategoryName" (filterChange)="applyFilter($event)"></app-product-filter>
+
+  <div class="loading-state" *ngIf="loading">
+    Chargement des produits...
+  </div>
+
+  <div class="grid" *ngIf="!loading && products.length > 0">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+      (addToCart)="addToCart($event)"
+      (viewDetails)="viewDetails($event)"
+    ></app-product-card>
+  </div>
+
+  <div class="empty" *ngIf="!loading && products.length === 0">
+    <i class="bi bi-search"></i>
+    Aucun produit trouvé.
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <a class="brand-lockup" routerLink="/" aria-label="Fashion Store accueil">
+    <span class="brand-mark">
+      <img src="assets/images/icons/shop_icon.png" alt="Fashion Store Logo">
+    </span>
+    <span class="brand-text">
+      <strong>Fashion Store</strong>
+      <span>Mode unisexe</span>
+    </span>
+  </a>
+
+  <div class="links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Accueil
+    </a>
+
+    <a routerLink="/products" routerLinkActive="active">
+      Boutique
+    </a>
+
+    <a *ngIf="role === 'client'" routerLink="/orders" routerLinkActive="active">
+      Commandes
+    </a>
+  </div>
+
+  <div class="nav-actions">
+    <a *ngIf="role === 'client'" class="cart" routerLink="/cart" aria-label="Panier">
+      <i class="bi bi-cart3"></i>
+      Panier <span>{{ cartCount }}</span>
+    </a>
+
+    <a *ngIf="!isLoggedIn" class="login-link" routerLink="/login">
+      Connexion
+    </a>
+
+    <button *ngIf="isLoggedIn" type="button" class="logout-btn" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i>
+      Déconnexion
+    </button>
+  </div>
+</nav>

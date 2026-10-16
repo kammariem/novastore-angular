@@ -1,0 +1,313 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Demo User",
+      "email": "demo-user@example.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Demo User",
+      "email": "demo-user@example.com",
+      "role": "client"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Femmes",
+      "slug": "femmes",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    },
+    {
+      "id": "2",
+      "name": "Hommes",
+      "slug": "hommes",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    },
+    {
+      "id": "3",
+      "name": "Enfants",
+      "slug": "enfants",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    },
+    {
+      "id": "4",
+      "name": "Chaussures",
+      "slug": "chaussures",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    },
+    {
+      "id": "5",
+      "name": "Accessoires",
+      "slug": "accessoires",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    },
+    {
+      "id": "6",
+      "name": "Promotions",
+      "slug": "promotions",
+      "active": true,
+      "description": "",
+      "image": "assets/images/placeholder.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Robe élégante beige",
+      "description": "Robe simple et chic adaptée aux sorties et aux occasions.",
+      "price": 89,
+      "currency": "TND",
+      "categoryId": "femmes",
+      "categoryName": "Femmes",
+      "type": "Robe",
+      "image": "assets/uploaded_imgs/1781827215264-e97ad900ce6a48480104ad0a1bb14a98.jpg",
+      "stock": 12,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827215264-e97ad900ce6a48480104ad0a1bb14a98.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Chemise blanche femme",
+      "description": "Chemise classique blanche, confortable et facile à porter.",
+      "price": 55,
+      "currency": "TND",
+      "categoryId": "femmes",
+      "categoryName": "Femmes",
+      "type": "Chemise",
+      "image": "assets/uploaded_imgs/1781827174326-88164c77a28d01f01276fbb971ed9cb0.jpg",
+      "stock": 20,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827174326-88164c77a28d01f01276fbb971ed9cb0.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Sac à main noir",
+      "description": "Sac moderne noir avec design simple et élégant.",
+      "price": 75,
+      "currency": "TND",
+      "categoryId": "accessoires",
+      "categoryName": "Accessoires",
+      "type": "Sac",
+      "image": "assets/uploaded_imgs/1781827236251-501a8ad0f01ed1a71ac82cb6e4399ee6.jpg",
+      "stock": 8,
+      "available": true,
+      "promotion": true,
+      "imagesUri": "assets/uploaded_imgs/1781827236251-501a8ad0f01ed1a71ac82cb6e4399ee6.jpg"
+    },
+    {
+      "id": "4",
+      "name": "T-shirt homme basic",
+      "description": "T-shirt confortable pour homme, style simple et quotidien.",
+      "price": 35,
+      "currency": "TND",
+      "categoryId": "hommes",
+      "categoryName": "Hommes",
+      "type": "T-Shirt",
+      "image": "assets/uploaded_imgs/1781827259516-41d4c33cb5309d09853148342f9fff6f.jpg",
+      "stock": 30,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827259516-41d4c33cb5309d09853148342f9fff6f.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Pantalon homme classique",
+      "description": "Pantalon homme élégant pour travail ou sorties.",
+      "price": 70,
+      "currency": "TND",
+      "categoryId": "hommes",
+      "categoryName": "Hommes",
+      "type": "Pantalon",
+      "image": "assets/uploaded_imgs/1781827296829-8304b06051be144ace77b366cb7fcad0.jpg",
+      "stock": 15,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827296829-8304b06051be144ace77b366cb7fcad0.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Veste femme courte",
+      "description": "Veste légère et moderne pour femme.",
+      "price": 110,
+      "currency": "TND",
+      "categoryId": "femmes",
+      "categoryName": "Femmes",
+      "type": "Veste",
+      "image": "assets/uploaded_imgs/1781827330614-3e997a2be2cbb382313b9e0240f79a7a.jpg",
+      "stock": 6,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827330614-3e997a2be2cbb382313b9e0240f79a7a.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Pull enfant doux",
+      "description": "Pull chaud et doux pour enfant.",
+      "price": 45,
+      "currency": "TND",
+      "categoryId": "enfants",
+      "categoryName": "Enfants",
+      "type": "Pull",
+      "image": "assets/uploaded_imgs/1781826988612-10b33c75cb266ab64b7ef7fb0d4c66a6.jpg",
+      "stock": 18,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781826988612-10b33c75cb266ab64b7ef7fb0d4c66a6.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Chaussures sport blanches",
+      "description": "Chaussures confortables pour marche et usage quotidien.",
+      "price": 95,
+      "currency": "TND",
+      "categoryId": "chaussures",
+      "categoryName": "Chaussures",
+      "type": "Chaussures",
+      "image": "assets/uploaded_imgs/1781827038480-0bef8e0269b692f8a49662625bd5194e-1.jpg",
+      "stock": 10,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827038480-0bef8e0269b692f8a49662625bd5194e-1.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Robe fleurie promotion",
+      "description": "Robe légère avec motif fleuri, disponible en promotion.",
+      "price": 65,
+      "oldPrice": 90,
+      "currency": "TND",
+      "categoryId": "femmes",
+      "categoryName": "Femmes",
+      "type": "Robe",
+      "image": "assets/uploaded_imgs/1781827116982-b8e75833f5ada4417a5a08847c67887e.jpg",
+      "stock": 0,
+      "available": false,
+      "promotion": true,
+      "imagesUri": "assets/uploaded_imgs/1781827116982-b8e75833f5ada4417a5a08847c67887e.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Chemise homme bleu ciel",
+      "description": "Chemise homme élégante, couleur bleu ciel.",
+      "price": 60,
+      "currency": "TND",
+      "categoryId": "hommes",
+      "categoryName": "Hommes",
+      "type": "Chemise",
+      "image": "assets/uploaded_imgs/1781827140445-25f7e1ffd3f9f401934b84fdad822ebb.jpg",
+      "stock": 3,
+      "available": true,
+      "promotion": false,
+      "imagesUri": "assets/uploaded_imgs/1781827140445-25f7e1ffd3f9f401934b84fdad822ebb.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "clientName": "Demo Client 1",
+      "clientEmail": "client1@example.com",
+      "clientPhone": "00000000",
+      "clientAddress": "Demo address",
+      "status": "En attente",
+      "total": 89,
+      "currency": "TND",
+      "createdAt": "2026-06-17",
+      "items": [
+        {
+          "productId": "1",
+          "productName": "Robe élégante beige",
+          "quantity": 1,
+          "price": 89,
+          "id": "1-1",
+          "image": "assets/images/placeholder.png"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "clientName": "Demo Client 2",
+      "clientEmail": "client2@example.com",
+      "clientPhone": "00000000",
+      "clientAddress": "Demo address",
+      "status": "Confirmée",
+      "total": 130,
+      "currency": "TND",
+      "createdAt": "2026-06-16",
+      "items": [
+        {
+          "productId": "3",
+          "productName": "Sac à main noir",
+          "quantity": 1,
+          "price": 75,
+          "id": "2-3",
+          "image": "assets/images/placeholder.png"
+        },
+        {
+          "productId": "2",
+          "productName": "Chemise blanche femme",
+          "quantity": 1,
+          "price": 55,
+          "id": "2-2",
+          "image": "assets/images/placeholder.png"
+        }
+      ]
+    },
+    {
+      "clientName": "Demo Client 3",
+      "clientEmail": "client3@example.com",
+      "clientPhone": "00000000",
+      "clientAddress": "Demo address",
+      "items": [
+        {
+          "id": "vZynP9j",
+          "productId": "vZynP9j",
+          "productName": "tv",
+          "image": "assets/uploaded_imgs/1781823836995-post-sponsorisee-tv-tcl-plan-de-travail-1-copie-5-1.png",
+          "quantity": 2,
+          "price": 5555
+        }
+      ],
+      "total": 11110,
+      "status": "Confirmée",
+      "currency": "TND",
+      "createdAt": "2026-06-18T23:05:09.586Z",
+      "id": "Wscepb8"
+    }
+  ],
+  "clients": [
+    {
+      "id": "client-test",
+      "name": "Demo Client 1",
+      "email": "client1@example.com",
+      "phone": "00000000",
+      "address": "Demo address",
+      "active": true,
+      "createdAt": "2026-06-17T00:00:00.000Z"
+    },
+    {
+      "id": "client@wamastore.com",
+      "name": "Demo Client 2",
+      "email": "client2@example.com",
+      "phone": "00000000",
+      "address": "Demo address",
+      "active": true,
+      "createdAt": "2026-06-18T23:05:09.586Z"
+    }
+  ],
+  "cart": []
+}

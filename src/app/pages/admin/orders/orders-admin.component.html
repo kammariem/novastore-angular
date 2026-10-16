@@ -1,0 +1,87 @@
+<section class="admin-page">
+  <div class="page-head">
+    <div>
+      <p>Commandes</p>
+      <h2>Liste des commandes</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="empty" *ngIf="orders.length === 0">
+      Aucune commande pour le moment.
+    </div>
+
+    <article class="order-card" *ngFor="let order of orders">
+      <div class="order-summary">
+        <div class="order-title">
+          <h3>Commande #{{ order.id }}</h3>
+          <p>{{ order.clientName }} · {{ order.items.length }} article(s)</p>
+        </div>
+
+        <div class="order-total">
+          <span>Total</span>
+          <strong>{{ order.total }} {{ order.currency }}</strong>
+        </div>
+
+        <span class="status" [ngClass]="{
+          confirmed: order.status === 'Confirmée',
+          preparing: order.status === 'En préparation',
+          delivered: order.status === 'Livrée',
+          canceled: order.status === 'Annulée'
+        }">
+          {{ order.status }}
+        </span>
+
+        <button type="button" class="details-btn" (click)="toggleDetails(order)">
+          {{ isDetailsVisible(order) ? 'Masquer détail' : 'Voir détail' }}
+        </button>
+      </div>
+
+      <div class="order-details" *ngIf="isDetailsVisible(order)">
+        <div class="detail-grid">
+          <div>
+            <span>Client</span>
+            <strong>{{ order.clientName }}</strong>
+            <p>{{ order.clientEmail }}</p>
+          </div>
+
+          <div>
+            <span>Téléphone</span>
+            <strong>{{ order.clientPhone }}</strong>
+            <p>{{ order.clientAddress }}</p>
+          </div>
+
+          <div>
+            <span>Date</span>
+            <strong>{{ order.createdAt | date:'dd/MM/yyyy HH:mm' }}</strong>
+          </div>
+        </div>
+
+        <ul>
+          <li *ngFor="let item of order.items">
+            <span>{{ item.productName }}</span>
+            <strong>{{ item.quantity }} × {{ item.price }} TND</strong>
+          </li>
+        </ul>
+
+        <div class="order-footer">
+          <label>
+            Statut
+            <select [ngModel]="order.status" (ngModelChange)="changeStatus(order, $event)">
+              <option *ngFor="let status of statuses" [ngValue]="status">
+                {{ status }}
+              </option>
+            </select>
+          </label>
+
+          <div class="quick-actions">
+            <button type="button" (click)="changeStatus(order, 'Confirmée')">Confirmer</button>
+            <button type="button" (click)="changeStatus(order, 'En préparation')">Préparer</button>
+            <button type="button" (click)="changeStatus(order, 'Livrée')">Livrer</button>
+            <button type="button" class="danger" (click)="changeStatus(order, 'Annulée')">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+<section class="admin-page">
+  <div class="page-head">
+    <div>
+      <p>Catégories</p>
+      <h2>Liste des catégories</h2>
+    </div>
+
+    <button type="button" class="primary-action" (click)="openAddModal()">
+      <i class="bi bi-plus-lg"></i>
+      Ajouter
+    </button>
+  </div>
+
+  <div class="table-card">
+    <div class="table-title">
+      <h3>Liste des catégories</h3>
+    </div>
+
+    <div class="table">
+      <div class="table-header">
+        <span>Catégorie</span>
+        <span>Slug</span>
+        <span>Description</span>
+        <span>Statut (active)</span>
+        <span>Actions</span>
+      </div>
+
+      <div class="table-row" *ngFor="let category of categories; trackBy: trackByCategoryId">
+        <div class="category-cell">
+          <img *ngIf="category.image" [src]="category.image" [alt]="category.name">
+          <strong>{{ category.name }}</strong>
+        </div>
+
+        <span>{{ category.slug }}</span>
+        <span>{{ category.description || '—' }}</span>
+
+        <span class="status" [class.draft]="!category.active">
+          {{ category.active ? 'active' : 'inactive' }}
+        </span>
+
+        <div class="actions">
+          <button type="button" (click)="openEditModal(category)">
+            Modifier
+          </button>
+
+          <button type="button" class="danger" (click)="deleteCategory(category)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <form class="modal-card" (ngSubmit)="saveCategory()">
+    <div class="modal-head">
+      <div>
+        <p>{{ editingCategoryId ? 'Modification' : 'Ajout' }}</p>
+        <h3>{{ editingCategoryId ? 'Modifier la catégorie' : 'Ajouter une catégorie' }}</h3>
+      </div>
+      <button type="button" class="close" (click)="closeModal()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <label>
+        Nom catégorie
+        <input name="name" required placeholder="Exemple : Femmes" [(ngModel)]="form.name">
+      </label>
+
+      <label>
+        Slug
+        <input name="slug" placeholder="exemple : femmes" [(ngModel)]="form.slug">
+      </label>
+
+      <label class="full">
+        Image
+        <input name="image" placeholder="assets/images/... ou URL" [(ngModel)]="form.image">
+      </label>
+
+      <label class="full">
+        Description
+        <textarea name="description" placeholder="Description courte" [(ngModel)]="form.description"></textarea>
+      </label>
+
+      <label class="checkbox-line">
+        <input type="checkbox" name="active" [(ngModel)]="form.active">
+        Catégorie active
+      </label>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="secondary" (click)="closeModal()">Annuler</button>
+      <button type="submit" class="primary-action">
+        {{ editingCategoryId ? 'Enregistrer' : 'Ajouter catégorie' }}
+      </button>
+    </div>
+  </form>
+</div>

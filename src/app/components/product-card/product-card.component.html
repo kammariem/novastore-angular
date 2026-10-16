@@ -1,0 +1,35 @@
+<div class="product-card">
+  <div class="image-box">
+    <img [src]="product.image" [alt]="product.name">
+    <span *ngIf="product.promotion" class="badge">Promo</span>
+    <span class="favorite" aria-hidden="true"><i class="bi bi-heart"></i></span>
+  </div>
+
+  <div class="content">
+    <p class="category">{{ product.categoryName }} · {{ product.type }}</p>
+    <h3>{{ product.name }}</h3>
+    <p class="description">{{ product.description }}</p>
+
+    <div class="price-row">
+      <strong>{{ product.price }} {{ product.currency }}</strong>
+      <span *ngIf="product.oldPrice" class="old-price">
+        {{ product.oldPrice }} {{ product.currency }}
+      </span>
+    </div>
+
+    <p class="stock" [class.out]="!product.available">
+      <i class="bi" [ngClass]="product.available ? 'bi-check-circle' : 'bi-x-circle'"></i>
+      {{ product.available ? 'En stock · ' + product.stock + ' disponibles' : 'Rupture de stock' }}
+    </p>
+
+    <div class="actions">
+      <button type="button" class="secondary" (click)="viewDetails.emit(product)">
+        Détails
+      </button>
+      <button type="button" [disabled]="!product.available" (click)="addToCart.emit(product)">
+        <i class="bi bi-cart3"></i>
+        Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
