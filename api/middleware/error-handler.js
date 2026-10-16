@@ -30,8 +30,22 @@ function errorHandler(error, req, res, next) {
     return;
   }
 
-  console.error('Upload API request failed:', error);
-  res.status(500).json({ message: 'Erreur pendant l’upload de l’image.' });
+  if (error.status === 400) {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  if (error.status === 404) {
+    res.status(404).json({ message: error.message });
+    return;
+  }
+
+  console.error('API request failed:', error);
+  res.status(500).json({
+    message: req.path === '/api/upload'
+      ? 'Erreur pendant l’upload de l’image.'
+      : 'Erreur interne du serveur.'
+  });
 }
 
 module.exports = { errorHandler };

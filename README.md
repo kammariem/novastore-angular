@@ -18,6 +18,17 @@ Angular 16, TypeScript, Firebase Authentication, JSON Server, Express, Multer, C
 
 The Express database probe is available at `http://localhost:3001/api/db-health`. It is separate from `/api/health`; Angular services continue to use JSON Server.
 
+### Read-only catalog API
+
+The Express API exposes:
+
+- `GET /api/products` and `GET /api/products/:id`
+- `GET /api/categories` and `GET /api/categories/:id` (category ID or slug)
+
+Unpaginated list requests return arrays compatible with the current Angular product and category models. Product prices are JSON numbers; product responses include category slug in `categoryId` and category name in `categoryName`. Optional pagination (`page`, `limit`, maximum `limit` 100) returns `{ "data": [...], "total": 10, "page": 1, "limit": 10, "totalPages": 1 }`. Product filters: `search`, `categoryId`, `categoryName`, `minPrice`, `maxPrice`, `available`, `promotion`. Category filters: `search`, `active`. Invalid query values return HTTP 400 and missing records HTTP 404. These routes are read-only; Angular continues to use JSON Server.
+
+Run API tests with `npm run test:api`.
+
 ## Security and roadmap
 - Demo fixtures are synthetic. No original customer records or stored passwords are included.
 - Admin permissions currently rely on frontend email checks: **not secure for production**.
