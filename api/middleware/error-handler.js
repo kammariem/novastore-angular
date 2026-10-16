@@ -24,6 +24,12 @@ function errorHandler(error, req, res, next) {
     return;
   }
 
+  if (error.code === 'DATABASE_UNAVAILABLE') {
+    console.error('Database health check failed:', error.cause || error);
+    res.status(503).json({ status: 'error', message: 'Base de données indisponible.' });
+    return;
+  }
+
   console.error('Upload API request failed:', error);
   res.status(500).json({ message: 'Erreur pendant l’upload de l’image.' });
 }

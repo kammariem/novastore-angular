@@ -148,6 +148,3 @@ vite.config.ts.timestamp-*
 src/assets/uploaded_imgs/*
 !src/assets/uploaded_imgs/.gitkeep
 *.zip
-.env
-.env.*
-!.env.example
