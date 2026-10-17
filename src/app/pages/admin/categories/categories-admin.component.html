@@ -12,6 +12,7 @@
   </div>
 
   <div class="table-card">
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
     <div class="table-title">
       <h3>Liste des catégories</h3>
     </div>
@@ -88,6 +89,8 @@
         Catégorie active
       </label>
     </div>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
     <div class="modal-actions">
       <button type="button" class="secondary" (click)="closeModal()">Annuler</button>

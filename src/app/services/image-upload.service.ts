@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface UploadResponse {
   imagePath: string;
@@ -10,7 +11,7 @@ interface UploadResponse {
   providedIn: 'root'
 })
 export class ImageUploadService {
-  private uploadUrl = 'http://localhost:3001/api/upload';
+  private uploadUrl = `${environment.apiUrl}/upload`;
 
   constructor(private http: HttpClient) {}
 

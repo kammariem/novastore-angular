@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { Order, OrderItem, OrderStatus } from '../models/order.model';
+import { environment } from '../../environments/environment';
 
 export interface CreateOrderData {
   clientName: string;
@@ -16,7 +17,7 @@ export interface CreateOrderData {
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:3000/orders';
+  private apiUrl = `${environment.apiUrl}/orders`;
   private ordersSubject = new BehaviorSubject<Order[]>([]);
 
   constructor(private http: HttpClient) {
@@ -44,7 +45,15 @@ export class OrderService {
       createdAt: new Date().toISOString()
     };
 
-    const savedOrder = await firstValueFrom(this.http.post<Order>(this.apiUrl, newOrder));
+    const savedOrder = await firstValueFrom(this.http.post<Order>(this.apiUrl, {
+      clientName: newOrder.clientName,
+      clientPhone: newOrder.clientPhone,
+      clientAddress: newOrder.clientAddress,
+      items: newOrder.items.map(item => ({
+        productId: String(item.productId),
+        quantity: item.quantity
+      }))
+    }));
     this.ordersSubject.next([this.prepareOrder(savedOrder), ...this.ordersSubject.value]);
   }
 

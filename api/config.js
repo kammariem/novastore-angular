@@ -15,6 +15,7 @@ const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:4200')
 module.exports = {
   host: process.env.UPLOAD_API_HOST || '127.0.0.1',
   port,
+  jwtSecret: process.env.JWT_SECRET,
   corsOrigins,
   uploadDir: path.resolve(__dirname, '..', 'src', 'assets', 'uploaded_imgs')
 };

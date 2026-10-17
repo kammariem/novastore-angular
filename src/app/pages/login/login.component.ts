@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +25,6 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private clientService: ClientService,
     private router: Router
   ) {}
 
@@ -39,9 +37,7 @@ export class LoginComponent {
       .then(result => {
         this.loading = false;
 
-        const email = result.user.email;
-
-        if (this.authService.isAdminEmail(email)) {
+        if (result.user.role === 'admin') {
           this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['/products']);
@@ -62,13 +58,8 @@ export class LoginComponent {
       return;
     }
 
-    if (this.registerPassword.length < 6) {
-      this.errorMessage = 'Le mot de passe doit contenir au moins 6 caractères.';
-      return;
-    }
-
-    if (this.authService.isAdminEmail(this.registerEmail)) {
-      this.errorMessage = 'Cet email est réservé à l’administrateur.';
+    if (this.registerPassword.length < 12) {
+      this.errorMessage = 'Le mot de passe doit contenir au moins 12 caractères.';
       return;
     }
 
@@ -77,19 +68,10 @@ export class LoginComponent {
     this.authService.registerClient(
       this.registerEmail.trim(),
       this.registerPassword,
-      this.registerName.trim()
+      this.registerName.trim(),
+      this.registerPhone.trim(),
+      this.registerAddress.trim()
     )
-      .then(result => {
-        return this.clientService.add({
-          id: result.user.uid,
-          name: this.registerName.trim(),
-          email: this.registerEmail.trim(),
-          phone: this.registerPhone.trim(),
-          address: this.registerAddress.trim(),
-          active: true,
-          createdAt: new Date().toISOString()
-        });
-      })
       .then(() => {
         this.loading = false;
         this.successMessage = 'Compte client créé avec succès.';
@@ -114,18 +96,6 @@ export class LoginComponent {
   }
 
   private getRegisterErrorMessage(code: string | undefined): string {
-    if (code === 'auth/email-already-in-use') {
-      return 'Un compte existe déjà avec cet email.';
-    }
-
-    if (code === 'auth/invalid-email') {
-      return 'Adresse email invalide.';
-    }
-
-    if (code === 'auth/weak-password') {
-      return 'Le mot de passe est trop faible.';
-    }
-
     return 'Impossible de créer le compte. Vérifiez les informations puis réessayez.';
   }
 }

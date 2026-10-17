@@ -1,0 +1,47 @@
+<section class="order-history">
+  <div class="page-head">
+    <p>Mon compte</p>
+    <h1>Mes commandes</h1>
+    <span>Retrouvez ici le suivi de vos achats.</span>
+  </div>
+
+  <p class="error" *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
+
+  <div class="empty-state" *ngIf="loading">Chargement de vos commandes...</div>
+
+  <div class="empty-state" *ngIf="!loading && !errorMessage && orders.length === 0">
+    Vous n’avez pas encore passé de commande.
+    <a routerLink="/products">Découvrir la boutique</a>
+  </div>
+
+  <article class="order-card" *ngFor="let order of orders">
+    <header>
+      <div>
+        <p>Commande #{{ order.id }}</p>
+        <span>{{ order.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <span class="status" [ngClass]="{
+        confirmed: order.status === 'Confirmée',
+        preparing: order.status === 'En préparation',
+        delivered: order.status === 'Livrée',
+        canceled: order.status === 'Annulée'
+      }">{{ order.status }}</span>
+    </header>
+
+    <ul>
+      <li *ngFor="let item of order.items">
+        <span>{{ item.productName }} × {{ item.quantity }}</span>
+        <strong>{{ item.price * item.quantity }} {{ order.currency }}</strong>
+      </li>
+    </ul>
+
+    <footer>
+      <span>{{ order.items.length }} article(s)</span>
+      <strong>Total : {{ order.total }} {{ order.currency }}</strong>
+    </footer>
+  </article>
+
+  <button *ngIf="errorMessage" type="button" class="retry-button" (click)="loadOrders()">
+    Réessayer
+  </button>
+</section>

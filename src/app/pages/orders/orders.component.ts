@@ -30,7 +30,12 @@ export class OrdersComponent {
     private router: Router
   ) {
     this.authService.currentUser$.pipe(take(1)).subscribe(user => {
-      this.client.clientEmail = user?.email || '';
+      this.client = {
+        clientName: user?.name || '',
+        clientEmail: user?.email || '',
+        clientPhone: user?.phone || '',
+        clientAddress: user?.address || ''
+      };
     });
   }
 
@@ -61,8 +66,7 @@ export class OrdersComponent {
       ...this.client,
       items,
       total: this.cartService.getTotal()
-    }).then(() => this.productService.reduceStock(items))
-      .then(() => {
+    }).then(() => {
         this.cartService.clear();
         this.successMessage = 'Commande envoyée avec succès. Le stock a été mis à jour.';
         this.client = {
@@ -71,6 +75,14 @@ export class OrdersComponent {
           clientPhone: '',
           clientAddress: ''
         };
+        return this.productService.reload().catch(() => {
+          this.errorMessage = 'Commande enregistrée, mais le catalogue n’a pas pu être actualisé.';
+        });
+      })
+      .catch(error => {
+        this.errorMessage = error?.status === 409
+          ? 'Un produit n’est plus disponible en quantité suffisante. Vérifiez le panier.'
+          : 'Impossible d’enregistrer la commande. Veuillez réessayer.';
       });
   }
 }

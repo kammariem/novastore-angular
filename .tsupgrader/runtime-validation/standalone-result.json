@@ -1,0 +1,152 @@
+{
+  "planHash": "5787686642b80ee086e80dd3150cf4b6fd1c8ecdbf7f1692842d5a49d8f98ff0",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-17T11:29:27.7812867Z",
+  "retryCount": 0,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E novastore@0.0.0 build\r\n\u003E ng build\r\n\r\n- Generating browser application bundles (phase: setup)...\r\n\u221A Browser application bundle generation complete.\r\n\u221A Browser application bundle generation complete.\r\n- Copying assets...\r\n\u221A Copying assets complete.\r\n- Generating index html...\r\n- Generating index html...\r\n1 rules skipped due to selector errors:\r\n  .form-floating\u003E~label -\u003E Did not expect successive traversals.\r\n\u221A Index html generation complete.\r\n\r\nInitial Chunk Files           | Names         |  Raw Size | Estimated Transfer Size\r\nmain.fd74d285c44f22cd.js      | main          | 615.55 kB |               154.10 kB\r\nstyles.f3f77400a797d494.css   | styles        | 309.88 kB |                33.96 kB\r\npolyfills.9450f915b78d44f1.js | polyfills     |  33.03 kB |                10.64 kB\r\nruntime.effd05b49a2b5973.js   | runtime       | 898 bytes |               514 bytes\r\n\r\n| Initial Total | 959.33 kB |               199.21 kB\r\n\r\nBuild at: 2026-10-17T11:29:08.026Z - Hash: 63e37b195bae6585 - Time: 7797ms\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/components/admin-layout/admin-layout.component.css exceeded maximum budget. Budget 2.00 kB was not met by 455 bytes with a total of 2.44 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/components/product-card/product-card.component.css exceeded maximum budget. Budget 2.00 kB was not met by 123 bytes with a total of 2.12 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/pages/admin/dashboard/dashboard.component.css exceeded maximum budget. Budget 2.00 kB was not met by 626 bytes with a total of 2.61 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/pages/cart/cart.component.css exceeded maximum budget. Budget 2.00 kB was not met by 34 bytes with a total of 2.03 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/pages/home/home.component.css exceeded maximum budget. Budget 2.00 kB was not met by 1.61 kB with a total of 3.61 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/pages/orders/orders.component.css exceeded maximum budget. Budget 2.00 kB was not met by 290 bytes with a total of 2.28 kB.\r\n\r\nWarning: D:/M_Projets/angular/novastore/src/app/pages/product-detail/product-detail.component.css exceeded maximum budget. Budget 2.00 kB was not met by 431 bytes with a total of 2.42 kB.\r\n\r\n\r\n",
+        "durationMs": 10252
+      },
+      {
+        "name": "api-tests-pass",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E novastore@0.0.0 test:api\r\n\u003E node --test api/test/*.test.js\r\n\r\n\u2714 registration hashes password and always creates a CLIENT role (520.2164ms)\r\n\u2714 registration rejects role injection and weak passwords (5.6325ms)\r\n\u2714 login provides an expiring bearer token and protects the current-user endpoint (240.4576ms)\r\n\u2714 missing, invalid, and incorrect credentials are rejected (233.7125ms)\r\n\u2714 catalog mutations require an active server-side administrator role (242.7307ms)\r\n\u2714 clients cannot update order status through the administrator API (232.1869ms)\r\n\u2714 an administrator can create products and upload remains authenticated (235.4589ms)\r\n\u2714 GET /api/products returns a frontend-compatible product array (35.9229ms)\r\n\u2714 GET /api/products supports filters and opt-in pagination (4.5227ms)\r\n\u2714 GET /api/products/:id returns an existing product (2.4342ms)\r\n\u2714 GET /api/products/:id returns 404 when product is missing (2.4389ms)\r\n\u2714 GET /api/categories returns frontend-compatible category objects (1.8862ms)\r\n\u2714 GET /api/categories/:id accepts a stable id or slug (2.6379ms)\r\n\u2714 GET /api/categories/:id returns 404 when category is missing (1.6968ms)\r\n\u2714 CORS rejects origins outside the configured allowlist (2.668ms)\r\n\u2714 invalid query values return 400 (5.6291ms)\r\n\u2714 invalid resource identifiers return 400 (1.8792ms)\r\n\u2714 database health failures return 503 without exposing database details (1.2623ms)\r\n\u2714 unexpected database errors return a generic 500 response (1.1766ms)\r\n\u2714 catalog service creates, updates, and deletes products and categories safely (3.4483ms)\r\n\u2714 order creation uses database prices and atomically decrements stock (2.2407ms)\r\n\u2714 order creation rolls back stock when any line is unavailable (0.4978ms)\r\n\u2714 order history scopes clients to their own orders and administrators to all orders (0.875ms)\r\n\u2714 order cancellation restores linked stock once and never restores legacy snapshot stock (0.6353ms)\r\n\u2714 order cancellation skips products that were deleted after checkout (0.3024ms)\r\n\u2139 tests 25\r\n\u2139 suites 0\r\n\u2139 pass 25\r\n\u2139 fail 0\r\n\u2139 cancelled 0\r\n\u2139 skipped 0\r\n\u2139 todo 0\r\n\u2139 duration_ms 1935.7928\r\n",
+        "durationMs": 2343
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E novastore@0.0.0 test\r\n\u003E ng test --watch=false --browsers=ChromeHeadless\r\n\r\n- Generating browser application bundles (phase: setup)...\r\n\u221A Browser application bundle generation complete.\r\n17 10 2026 12:29:16.665:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/\r\n17 10 2026 12:29:16.667:INFO [launcher]: Launching browsers ChromeHeadless with concurrency unlimited\r\n17 10 2026 12:29:16.687:INFO [launcher]: Starting browser ChromeHeadless\r\n17 10 2026 12:29:18.027:INFO [Chrome Headless 147.0.0.0 (Windows 10)]: Connected on socket NQv1FH5nl9t3NkCOAAAA with id 80058397\r\nChrome Headless 147.0.0.0 (Windows 10): Executed 0 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 1 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.022 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 2 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.037 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 3 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.046 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 4 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.049 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 5 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.056 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 6 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.065 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 7 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.069 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 8 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.071 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 9 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.079 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 10 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.09 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 11 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.093 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 12 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.096 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 13 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.106 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 14 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.108 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 15 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.109 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 16 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.109 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 17 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.114 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 18 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.116 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 19 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.117 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 20 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.119 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 21 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.122 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 22 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.123 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 23 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.124 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 24 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.128 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 25 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.13 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 26 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.133 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 27 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.135 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 28 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.141 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 29 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.143 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 30 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.148 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 31 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.153 secs)\r\n\u001B[1A\u001B[2KChrome Headless 147.0.0.0 (Windows 10): Executed 32 of 32\u001B[32m SUCCESS\u001B[39m (0 secs / 0.155\n\u2026[truncated]",
+        "durationMs": 9286,
+        "testResults": {
+          "testFramework": "jasmine",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      },
+      {
+        "name": "prisma-schema-validates",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E novastore@0.0.0 prisma:validate\r\n\u003E prisma validate\r\n\r\nLoaded Prisma config from prisma.config.ts.\r\n\r\nPrisma config detected, skipping environment variable loading.\r\nPrisma schema loaded from prisma\\schema.prisma\r\nThe schema at prisma\\schema.prisma is valid \uD83D\uDE80\r\n",
+        "durationMs": 1048
+      },
+      {
+        "name": "angular-home-responds",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n\u003C!doctype html\u003E\n\u003Chtml lang=\u0022en\u0022\u003E\n\u003Chead\u003E\n  \u003Cmeta charset=\u0022utf-8\u0022\u003E\n  \u003Ctitle\u003EFashion Store\u003C/title\u003E\n  \u003Cbase href=\u0022/\u0022\u003E\n  \u003Cmeta name=\u0022viewport\u0022 content=\u0022width=device-width, initial-scale=1\u0022\u003E\n  \u003Clink rel=\u0022icon\u0022 type=\u0022image/x-icon\u0022 href=\u0022assets/images/icons/shop_icon.png\u0022\u003E\n\n  \u003Clink rel=\u0022stylesheet\u0022 href=\u0022https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css\u0022 integrity=\u0022sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck\u002Bw\u002B/U6swU2Im1vVX0SVk9ABhg==\u0022 crossorigin=\u0022anonymous\u0022 referrerpolicy=\u0022no-referrer\u0022/\u003E\n\n  \u003Clink rel=\u0022stylesheet\u0022 href=\u0022https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css\u0022/\u003E\n\u003Clink rel=\u0022stylesheet\u0022 href=\u0022styles.css\u0022\u003E\u003C/head\u003E\n\u003Cbody\u003E\n  \u003Capp-root\u003E\u003C/app-root\u003E\n\u003Cscript src=\u0022runtime.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022polyfills.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022styles.js\u0022 defer\u003E\u003C/script\u003E\u003Cscript src=\u0022vendor.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022main.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003C/body\u003E\n\u003C/html\u003E\n\n--- server output ---\n\r\n\u003E novastore@0.0.0 start\r\n\u003E ng serve --host 127.0.0.1 --port 4201\r\n\r\n- Generating browser application bundles (phase: setup)...\r\n\u221A Browser application bundle generation complete.\r\n",
+        "durationMs": 6754
+      }
+    ],
+    "executions": [
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "D:\\M_Projets\\angular\\novastore",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "api-tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "test:api"
+        ],
+        "cwd": "D:\\M_Projets\\angular\\novastore",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "test",
+          "--",
+          "--watch=false",
+          "--browsers=ChromeHeadless"
+        ],
+        "cwd": "D:\\M_Projets\\angular\\novastore",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "prisma-schema-validates",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "prisma:validate"
+        ],
+        "cwd": "D:\\M_Projets\\angular\\novastore",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "angular-home-responds",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "start",
+          "--",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "4201"
+        ],
+        "cwd": "D:\\M_Projets\\angular\\novastore",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run prisma:validate
+        env:
+          DATABASE_URL: postgresql://novastore_ci:ci-placeholder@localhost:5432/novastore_ci?schema=public
+      - run: npm run prisma:generate
+        env:
+          DATABASE_URL: postgresql://novastore_ci:ci-placeholder@localhost:5432/novastore_ci?schema=public
+      - run: npm run test:api
+      - run: npm test -- --watch=false --browsers=ChromeHeadless
+      - run: npm run build

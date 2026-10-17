@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom, map } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ProductFilter } from '../models/filter.model';
-import { OrderItem } from '../models/order.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/products';
+  private apiUrl = `${environment.apiUrl}/products`;
   private productsSubject = new BehaviorSubject<Product[]>([]);
 
   constructor(private http: HttpClient) {
@@ -55,7 +55,7 @@ export class ProductService {
     );
   }
 
-  getStockIssues(items: OrderItem[]): string[] {
+  getStockIssues(items: Array<{ productId: string; productName: string; quantity: number }>): string[] {
     const products = this.productsSubject.value;
 
     return items
@@ -75,30 +75,6 @@ export class ProductService {
       .filter(message => message.length > 0);
   }
 
-  async reduceStock(items: OrderItem[]): Promise<void> {
-    const updatedProducts = this.productsSubject.value.map(product => {
-      const item = items.find(orderItem => String(orderItem.productId) === product.id);
-
-      if (!item) {
-        return product;
-      }
-
-      const newStock = Math.max(product.stock - item.quantity, 0);
-
-      return this.prepareProduct({
-        ...product,
-        stock: newStock,
-        available: newStock > 0
-      });
-    });
-
-    for (const product of updatedProducts) {
-      await firstValueFrom(this.http.put<Product>(`${this.apiUrl}/${product.id}`, product));
-    }
-
-    this.productsSubject.next(updatedProducts);
-  }
-
   async add(product: Product): Promise<void> {
     const newProduct = this.prepareProduct({
       ...product,
@@ -108,7 +84,8 @@ export class ProductService {
 
     delete newProduct.id;
 
-    const savedProduct = await firstValueFrom(this.http.post<Product>(this.apiUrl, newProduct));
+    const { createdAt: _createdAt, ...payload } = newProduct;
+    const savedProduct = await firstValueFrom(this.http.post<Product>(this.apiUrl, payload));
     this.productsSubject.next([
       ...this.productsSubject.value,
       this.prepareProduct(savedProduct)
@@ -129,7 +106,8 @@ export class ProductService {
       available: product.stock == null ? currentProduct.available : product.stock > 0
     });
 
-    const savedProduct = await firstValueFrom(this.http.put<Product>(`${this.apiUrl}/${id}`, updatedProduct));
+    const { id: _productId, createdAt: _createdAt, ...payload } = updatedProduct;
+    const savedProduct = await firstValueFrom(this.http.put<Product>(`${this.apiUrl}/${id}`, payload));
     const normalizedProduct = this.prepareProduct(savedProduct);
 
     this.productsSubject.next(

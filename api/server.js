@@ -3,10 +3,14 @@ const { errorHandler } = require('./middleware/error-handler');
 const prisma = require('./lib/prisma');
 const { createApp } = require('./app');
 
+if (typeof config.jwtSecret !== 'string' || Buffer.byteLength(config.jwtSecret) < 32) {
+  throw new Error('Set JWT_SECRET to a random value of at least 32 bytes before starting the API.');
+}
+
 const app = createApp({ prisma, config, errorHandler });
 
 const server = app.listen(config.port, config.host, () => {
-  console.warn('WARNING: /api/upload has no authentication and must not be exposed publicly.');
+  console.warn('Upload API is bound to localhost by default; review production deployment controls before exposing it.');
   console.log(`Upload API running on http://${config.host}:${config.port}`);
 });
 

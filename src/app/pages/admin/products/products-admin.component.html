@@ -11,6 +11,7 @@
   </div>
 
   <div class="table-card">
+    <p class="error" *ngIf="errorMessage && !showModal">{{ errorMessage }}</p>
     <div class="table-title">
       <h3>Liste des produits</h3>
     </div>

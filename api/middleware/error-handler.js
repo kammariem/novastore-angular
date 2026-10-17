@@ -25,8 +25,31 @@ function errorHandler(error, req, res, next) {
   }
 
   if (error.code === 'DATABASE_UNAVAILABLE') {
-    console.error('Database health check failed:', error.cause || error);
+    console.error('Database health check failed:', {
+      name: error.cause?.name,
+      code: error.cause?.code
+    });
     res.status(503).json({ status: 'error', message: 'Base de données indisponible.' });
+    return;
+  }
+
+  if (error.status === 401 || error.status === 403 || error.status === 409) {
+    res.status(error.status).json({ message: error.message });
+    return;
+  }
+
+  if (error.code === 'P2002') {
+    res.status(409).json({ message: 'A record with that unique value already exists.' });
+    return;
+  }
+
+  if (error.code === 'P2003') {
+    res.status(409).json({ message: 'This record is referenced by another resource.' });
+    return;
+  }
+
+  if (error.code === 'P2025') {
+    res.status(404).json({ message: 'Resource not found.' });
     return;
   }
 
@@ -40,7 +63,12 @@ function errorHandler(error, req, res, next) {
     return;
   }
 
-  console.error('API request failed:', error);
+  console.error('API request failed:', {
+    method: req.method,
+    path: req.path,
+    name: error.name,
+    code: error.code
+  });
   res.status(500).json({
     message: req.path === '/api/upload'
       ? 'Erreur pendant l’upload de l’image.'

@@ -126,19 +126,23 @@ export class ProductsAdminComponent implements OnInit {
 
       await this.productService.add(this.form);
       this.closeModal();
-    } catch (error) {
+    } catch {
       this.saving = false;
-      this.errorMessage = 'Impossible d’enregistrer le produit. Vérifiez que le serveur upload et json-server sont lancés.';
+      this.errorMessage = 'Impossible d’enregistrer le produit. Vérifiez l’accès administrateur et la disponibilité de l’API.';
     }
   }
 
-  deleteProduct(product: Product): void {
+  async deleteProduct(product: Product): Promise<void> {
     if (!product.id) {
       return;
     }
 
     if (confirm(`Supprimer le produit "${product.name}" ?`)) {
-      void this.productService.delete(product.id);
+      try {
+        await this.productService.delete(product.id);
+      } catch {
+        this.errorMessage = 'Impossible de supprimer le produit.';
+      }
     }
   }
 

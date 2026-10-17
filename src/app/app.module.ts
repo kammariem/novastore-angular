@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-
-import { firebaseConfig } from '../environments/environment';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -23,6 +19,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderHistoryComponent } from './pages/orders/order-history.component';
 import { LoginComponent } from './pages/login/login.component';
 
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
@@ -52,6 +49,7 @@ import { PriceDistributionComponent } from './pages/admin/dashboard/price-distri
     ProductDetailComponent,
     CartComponent,
     OrdersComponent,
+    OrderHistoryComponent,
     LoginComponent,
     DashboardComponent,
     CategoriesAdminComponent,
@@ -70,11 +68,11 @@ import { PriceDistributionComponent } from './pages/admin/dashboard/price-distri
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth())
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

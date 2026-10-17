@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientProfile } from '../../../models/client.model';
 import { ClientService } from '../../../services/client.service';
-import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-clients-admin',
@@ -13,14 +12,13 @@ export class ClientsAdminComponent implements OnInit {
   form: ClientProfile = this.getEmptyClient();
   showModal = false;
   editingClientId: string | null = null;
+  errorMessage = '';
 
   constructor(
-    private clientService: ClientService,
-    private orderService: OrderService
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
-    this.orderService.getAll().subscribe(orders => this.clientService.syncFromOrders(orders));
     this.clientService.getAll().subscribe(clients => this.clients = clients);
   }
 
@@ -41,12 +39,20 @@ export class ClientsAdminComponent implements OnInit {
       return;
     }
 
-    this.clientService.update(this.editingClientId, this.form).then(() => this.closeModal());
+    this.errorMessage = '';
+    this.clientService.update(this.editingClientId, this.form)
+      .then(() => this.closeModal())
+      .catch(() => this.errorMessage = 'Impossible de mettre à jour le compte client.');
   }
 
-  deleteClient(client: ClientProfile): void {
-    if (confirm(`Supprimer le client "${client.name}" ?`)) {
-      this.clientService.delete(client.id);
+  async deleteClient(client: ClientProfile): Promise<void> {
+    if (confirm(`Désactiver le compte de "${client.name}" ?`)) {
+      this.errorMessage = '';
+      try {
+        await this.clientService.delete(client.id);
+      } catch {
+        this.errorMessage = 'Impossible de désactiver le compte client.';
+      }
     }
   }
 

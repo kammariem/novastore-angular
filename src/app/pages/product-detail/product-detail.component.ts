@@ -41,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
         return;
       }
 
-      if (this.authService.isAdminEmail(user.email)) {
+      if (user.role === 'admin') {
         alert('Le compte admin ne peut pas commander.');
         return;
       }

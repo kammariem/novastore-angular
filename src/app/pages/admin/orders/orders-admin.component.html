@@ -7,6 +7,7 @@
   </div>
 
   <div class="table-card">
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
     <div class="empty" *ngIf="orders.length === 0">
       Aucune commande pour le moment.
     </div>
@@ -68,17 +69,17 @@
           <label>
             Statut
             <select [ngModel]="order.status" (ngModelChange)="changeStatus(order, $event)">
-              <option *ngFor="let status of statuses" [ngValue]="status">
+              <option *ngFor="let status of availableStatuses(order)" [ngValue]="status">
                 {{ status }}
               </option>
             </select>
           </label>
 
           <div class="quick-actions">
-            <button type="button" (click)="changeStatus(order, 'Confirmée')">Confirmer</button>
-            <button type="button" (click)="changeStatus(order, 'En préparation')">Préparer</button>
-            <button type="button" (click)="changeStatus(order, 'Livrée')">Livrer</button>
-            <button type="button" class="danger" (click)="changeStatus(order, 'Annulée')">Annuler</button>
+            <button type="button" [disabled]="!canChangeStatus(order, 'Confirmée')" (click)="changeStatus(order, 'Confirmée')">Confirmer</button>
+            <button type="button" [disabled]="!canChangeStatus(order, 'En préparation')" (click)="changeStatus(order, 'En préparation')">Préparer</button>
+            <button type="button" [disabled]="!canChangeStatus(order, 'Livrée')" (click)="changeStatus(order, 'Livrée')">Livrer</button>
+            <button type="button" class="danger" [disabled]="!canChangeStatus(order, 'Annulée')" (click)="changeStatus(order, 'Annulée')">Annuler</button>
           </div>
         </div>
       </div>

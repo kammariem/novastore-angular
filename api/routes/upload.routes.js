@@ -3,9 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const multer = require('multer');
-const config = require('../config');
+const { createAuthentication } = require('../middleware/authenticate');
 
-const router = express.Router();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
@@ -59,31 +58,38 @@ function safeBaseName(originalName) {
     .slice(0, 60) || 'product';
 }
 
-router.post('/upload', upload.single('image'), async (req, res, next) => {
-  try {
-    if (!req.file) {
-      res.status(400).json({ message: 'Aucun fichier image reçu.' });
-      return;
+function createUploadRouter(prisma, apiConfig) {
+  const router = express.Router();
+  const { requireAuth, requireAdmin } = createAuthentication(prisma, apiConfig);
+
+  router.post('/upload', requireAuth, requireAdmin, upload.single('image'), async (req, res, next) => {
+    try {
+      if (!req.file) {
+        res.status(400).json({ message: 'Aucun fichier image reçu.' });
+        return;
+      }
+
+      const imageType = getImageType(req.file.buffer);
+
+      if (!imageType) {
+        const error = new Error('INVALID_FILE_TYPE');
+        error.code = 'INVALID_FILE_TYPE';
+        throw error;
+      }
+
+      const filename = `${Date.now()}-${crypto.randomUUID()}-${safeBaseName(req.file.originalname)}${imageType.extension}`;
+      await fs.promises.mkdir(apiConfig.uploadDir, { recursive: true });
+      await fs.promises.writeFile(path.join(apiConfig.uploadDir, filename), req.file.buffer, { flag: 'wx' });
+
+      res.status(201).json({
+        imagePath: `assets/uploaded_imgs/${filename}`
+      });
+    } catch (error) {
+      next(error);
     }
+  });
 
-    const imageType = getImageType(req.file.buffer);
+  return router;
+}
 
-    if (!imageType) {
-      const error = new Error('INVALID_FILE_TYPE');
-      error.code = 'INVALID_FILE_TYPE';
-      throw error;
-    }
-
-    const filename = `${Date.now()}-${crypto.randomUUID()}-${safeBaseName(req.file.originalname)}${imageType.extension}`;
-    await fs.promises.mkdir(config.uploadDir, { recursive: true });
-    await fs.promises.writeFile(path.join(config.uploadDir, filename), req.file.buffer, { flag: 'wx' });
-
-    res.status(201).json({
-      imagePath: `assets/uploaded_imgs/${filename}`
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-module.exports = router;
+module.exports = { createUploadRouter };

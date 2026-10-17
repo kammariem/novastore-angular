@@ -42,7 +42,7 @@
       <input type="email" name="registerEmail" placeholder="Email" [(ngModel)]="registerEmail" required>
       <input type="tel" name="registerPhone" placeholder="Téléphone" [(ngModel)]="registerPhone">
       <textarea name="registerAddress" placeholder="Adresse de livraison" [(ngModel)]="registerAddress"></textarea>
-      <input type="password" name="registerPassword" placeholder="Mot de passe" [(ngModel)]="registerPassword" required>
+      <input type="password" name="registerPassword" placeholder="Mot de passe (12 caractères minimum)" [(ngModel)]="registerPassword" minlength="12" maxlength="72" required>
 
       <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
       <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>

@@ -1,65 +1,96 @@
-import { Injectable, inject } from '@angular/core';
-import {
-  Auth,
-  User,
-  UserCredential,
-  authState,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile
-} from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { UserRole } from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { AppUser } from '../models/user.model';
+
+interface AuthResponse {
+  user: Omit<AppUser, 'role'> & { role: 'CLIENT' | 'ADMIN' };
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private auth = inject(Auth);
+  private readonly tokenStorageKey = 'novastore.accessToken';
+  private readonly userStorageKey = 'novastore.user';
+  private readonly currentUserSubject = new BehaviorSubject<AppUser | null>(this.restoreUser());
 
-  readonly adminEmail = 'admin@wamastore.com';
-  readonly clientEmail = 'client@wamastore.com';
+  readonly currentUser$ = this.currentUserSubject.asObservable();
 
-  currentUser$: Observable<User | null> = authState(this.auth);
+  constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  async login(email: string, password: string): Promise<{ user: AppUser }> {
+    const response = await firstValueFrom(
+      this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, { email, password })
+    );
+    this.saveSession(response);
+    const user = this.currentUserSubject.value;
+    if (!user) throw new Error('The login response did not establish a user session.');
+    return { user };
   }
 
-  registerClient(email: string, password: string, displayName: string): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(this.auth, email, password).then(credential => {
-      const name = displayName.trim();
+  async registerClient(
+    email: string,
+    password: string,
+    displayName: string,
+    phone = '',
+    address = ''
+  ): Promise<{ user: AppUser }> {
+    const response = await firstValueFrom(
+      this.http.post<AuthResponse>(`${environment.apiUrl}/auth/register`, {
+        name: displayName,
+        email,
+        password,
+        phone,
+        address
+      })
+    );
+    this.saveSession(response);
+    const user = this.currentUserSubject.value;
+    if (!user) throw new Error('The registration response did not establish a user session.');
+    return { user };
+  }
 
-      if (!name) {
-        return credential;
+  async logout(): Promise<void> {
+    sessionStorage.removeItem(this.tokenStorageKey);
+    sessionStorage.removeItem(this.userStorageKey);
+    this.currentUserSubject.next(null);
+  }
+
+  getAccessToken(): string | null {
+    return sessionStorage.getItem(this.tokenStorageKey);
+  }
+
+  private saveSession(response: AuthResponse): void {
+    const user: AppUser = {
+      ...response.user,
+      role: response.user.role === 'ADMIN' ? 'admin' : 'client',
+      createdAt: response.user.createdAt
+    };
+    sessionStorage.setItem(this.tokenStorageKey, response.token);
+    sessionStorage.setItem(this.userStorageKey, JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
+  private restoreUser(): AppUser | null {
+    const token = sessionStorage.getItem(this.tokenStorageKey);
+    const serializedUser = sessionStorage.getItem(this.userStorageKey);
+    if (!token || !serializedUser) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])) as { exp?: number };
+      if (!payload.exp || payload.exp * 1000 <= Date.now()) {
+        sessionStorage.removeItem(this.tokenStorageKey);
+        sessionStorage.removeItem(this.userStorageKey);
+        return null;
       }
-
-      return updateProfile(credential.user, { displayName: name }).then(() => credential);
-    });
-  }
-
-  logout(): Promise<void> {
-    return signOut(this.auth);
-  }
-
-  isAdminEmail(email: string | null | undefined): boolean {
-    return (email || '').toLowerCase() === this.adminEmail;
-  }
-
-  isClientEmail(email: string | null | undefined): boolean {
-    return (email || '').toLowerCase() === this.clientEmail;
-  }
-
-  getRoleByEmail(email: string | null | undefined): UserRole {
-    if (this.isAdminEmail(email)) {
-      return 'admin';
+      return JSON.parse(serializedUser) as AppUser;
+    } catch {
+      sessionStorage.removeItem(this.tokenStorageKey);
+      sessionStorage.removeItem(this.userStorageKey);
+      return null;
     }
-
-    if (email) {
-      return 'client';
-    }
-
-    return 'guest';
   }
 }

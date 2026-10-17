@@ -12,6 +12,7 @@ export class CategoriesAdminComponent implements OnInit {
   form: Category = this.getEmptyCategory();
   showModal = false;
   editingCategoryId: string | null = null;
+  errorMessage = '';
 
   constructor(private categoryService: CategoryService) {}
 
@@ -22,12 +23,14 @@ export class CategoriesAdminComponent implements OnInit {
   openAddModal(): void {
     this.editingCategoryId = null;
     this.form = this.getEmptyCategory();
+    this.errorMessage = '';
     this.showModal = true;
   }
 
   openEditModal(category: Category): void {
     this.editingCategoryId = category.id || null;
     this.form = { ...category };
+    this.errorMessage = '';
     this.showModal = true;
   }
 
@@ -35,28 +38,38 @@ export class CategoriesAdminComponent implements OnInit {
     this.showModal = false;
     this.editingCategoryId = null;
     this.form = this.getEmptyCategory();
+    this.errorMessage = '';
   }
 
-  saveCategory(): void {
+  async saveCategory(): Promise<void> {
+    this.errorMessage = '';
     if (!this.form.slug) {
       this.form.slug = this.slugify(this.form.name);
     }
 
-    if (this.editingCategoryId) {
-      this.categoryService.update(this.editingCategoryId, this.form).then(() => this.closeModal());
-      return;
+    try {
+      if (this.editingCategoryId) {
+        await this.categoryService.update(this.editingCategoryId, this.form);
+      } else {
+        await this.categoryService.add(this.form);
+      }
+      this.closeModal();
+    } catch {
+      this.errorMessage = 'Impossible d’enregistrer la catégorie. Vérifiez le nom et le slug.';
     }
-
-    this.categoryService.add(this.form).then(() => this.closeModal());
   }
 
-  deleteCategory(category: Category): void {
+  async deleteCategory(category: Category): Promise<void> {
     if (!category.id) {
       return;
     }
 
     if (confirm(`Supprimer la catégorie "${category.name}" ?`)) {
-      this.categoryService.delete(category.id);
+      try {
+        await this.categoryService.delete(category.id);
+      } catch {
+        this.errorMessage = 'Impossible de supprimer cette catégorie. Vérifiez qu’elle ne contient aucun produit.';
+      }
     }
   }
 

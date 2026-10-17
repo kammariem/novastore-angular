@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       this.isLoggedIn = !!user;
       this.userEmail = user?.email || '';
-      this.role = this.authService.getRoleByEmail(user?.email);
+      this.role = user?.role || 'guest';
     });
   }
 

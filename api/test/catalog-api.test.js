@@ -157,6 +157,15 @@ test('GET /api/categories/:id returns 404 when category is missing', async () =>
   assert.deepEqual(await response.json(), { message: 'Category not found' });
 });
 
+test('CORS rejects origins outside the configured allowlist', async () => {
+  const response = await fetch(`${baseUrl}/api/products`, {
+    headers: { origin: 'https://untrusted.example' }
+  });
+
+  assert.equal(response.status, 403);
+  assert.deepEqual(await response.json(), { message: 'Origine non autorisée.' });
+});
+
 test('invalid query values return 400', async () => {
   for (const url of [
     '/api/products?page=0',

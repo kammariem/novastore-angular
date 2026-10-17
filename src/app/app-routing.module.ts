@@ -6,6 +6,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderHistoryComponent } from './pages/orders/order-history.component';
 import { LoginComponent } from './pages/login/login.component';
 
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'cart', component: CartComponent, canActivate: [ClientGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [ClientGuard] },
+  { path: 'my-orders', component: OrderHistoryComponent, canActivate: [ClientGuard] },
 
   // Espace admin séparé avec sidebar
   {

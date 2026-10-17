@@ -70,7 +70,7 @@ export class ProductsComponent implements OnInit {
         return;
       }
 
-      if (this.authService.isAdminEmail(user.email)) {
+      if (user.role === 'admin') {
         alert('Le compte admin ne peut pas commander. Connectez-vous avec le compte client.');
         return;
       }

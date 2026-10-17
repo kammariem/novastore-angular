@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { Category } from '../models/category.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiUrl = 'http://localhost:3000/categories';
+  private apiUrl = `${environment.apiUrl}/categories`;
   private categoriesSubject = new BehaviorSubject<Category[]>([]);
 
   constructor(private http: HttpClient) {
@@ -25,7 +26,8 @@ export class CategoryService {
 
   async add(category: Category): Promise<void> {
     const cleanCategory = this.prepareCategory(category);
-    const savedCategory = await firstValueFrom(this.http.post<Category>(this.apiUrl, cleanCategory));
+    const { id: _categoryId, ...payload } = cleanCategory;
+    const savedCategory = await firstValueFrom(this.http.post<Category>(this.apiUrl, payload));
     this.categoriesSubject.next([
       ...this.categoriesSubject.value,
       this.prepareCategory(savedCategory)
@@ -44,7 +46,8 @@ export class CategoryService {
       ...category
     });
 
-    const savedCategory = await firstValueFrom(this.http.put<Category>(`${this.apiUrl}/${id}`, updatedCategory));
+    const { id: _categoryId, ...payload } = updatedCategory;
+    const savedCategory = await firstValueFrom(this.http.put<Category>(`${this.apiUrl}/${id}`, payload));
 
     this.categoriesSubject.next(
       this.categoriesSubject.value.map(item => item.id === id ? this.prepareCategory(savedCategory) : item)

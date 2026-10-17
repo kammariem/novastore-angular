@@ -24,8 +24,6 @@ export class AdminService {
       this.categoryService.getAll()
     ]).pipe(
       map(([products, orders, clients, categories]) => {
-        this.clientService.syncFromOrders(orders);
-
         return {
           totalProducts: products.length,
           availableProducts: products.filter(product => product.available).length,
@@ -34,7 +32,7 @@ export class AdminService {
           totalOrders: orders.length,
           pendingOrders: orders.filter(order => order.status === 'En attente').length,
           confirmedOrders: orders.filter(order => order.status === 'Confirmée').length,
-          totalClients: clients.length,
+          totalClients: clients.filter(client => client.active).length,
           totalCategories: categories.length
         };
       })

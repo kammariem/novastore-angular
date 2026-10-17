@@ -20,7 +20,7 @@ export class ClientGuard implements CanActivate {
           return this.router.createUrlTree(['/login']);
         }
 
-        if (this.authService.isAdminEmail(user.email)) {
+        if (user.role === 'admin') {
           return this.router.createUrlTree(['/admin/dashboard']);
         }
 
